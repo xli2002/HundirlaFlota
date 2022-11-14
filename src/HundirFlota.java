@@ -13,7 +13,6 @@ public class HundirFlota {
 
         show(arrayA, arrayB);
         show(arrayC, arrayD);
-
     }
 
     /**
