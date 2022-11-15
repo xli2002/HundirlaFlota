@@ -1,18 +1,22 @@
+import java.util.Scanner;
+
 public class HundirFlota {
     public static void main(String[] args) {
 
-        char[][] arrayA = new char[11][11];
-        char[][] arrayB = new char[11][11];
-        char[][] arrayC = new char[11][11];
-        char[][] arrayD = new char[11][11];
+        char[][] tableroA = new char[11][11];
+        char[][] tableroB = new char[11][11];
+        char[][] tableroC = new char[11][11];
+        char[][] tableroD = new char[11][11];
+        char[] barcos = new char[5];
 
-        crearTablero(arrayA);
-        crearTablero(arrayB);
-        crearTablero(arrayC);
-        crearTablero(arrayD);
+        crearTablero(tableroA);
+        crearTablero(tableroB);
+        crearTablero(tableroC);
+        crearTablero(tableroD);
 
-        show(arrayA, arrayB);
-        show(arrayC, arrayD);
+//      nombre();
+        showJugador(tableroA, tableroB);
+        showPC(tableroC, tableroD);
     }
 
     /**
@@ -21,21 +25,49 @@ public class HundirFlota {
      * @clean limpia pantalla
      */
     public static void clean() {
-        System.out.println("LIMPIA PANTALLA");
         System.out.flush();
     }
 
     /**
-     * Muestra en pantalla
+     * Muestra en pantalla el tablero del jugador
      *
      * @param arrayD Muestra los tableros de los Disparos
      * @param arrayP Muestra los tableros de las Posiciones
      */
-    public static void show(char[][] arrayD, char[][] arrayP) {
+    public static void showJugador(char[][] arrayD, char[][] arrayP) {
+        clean();
+        System.out.println("\t TU TABLERO \t\t\t TU TABLERO");
         for (int fila = 0; fila < arrayD.length; fila++) {
             for (int columna = 0; columna < arrayD[0].length; columna++) {
                 System.out.print(arrayD[fila][columna]);
                 System.out.print(' ');
+
+            }
+            System.out.print("\t");
+
+            for (int columna = 0; columna < arrayD[0].length; columna++) {
+                System.out.print(arrayP[fila][columna]);
+                System.out.print(' ');
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /**
+     * Muestra en pantalla el tablero del pc
+     *
+     * @param arrayD Muestra los tableros de los Disparos
+     * @param arrayP Muestra los tableros de las Posiciones
+     */
+    public static void showPC(char[][] arrayD, char[][] arrayP) {
+        clean();
+        System.out.println("\t PC TABLERO \t\t\t PC TABLERO");
+        for (int fila = 0; fila < arrayD.length; fila++) {
+            for (int columna = 0; columna < arrayD[0].length; columna++) {
+                System.out.print(arrayD[fila][columna]);
+                System.out.print(' ');
+
             }
             System.out.print("\t");
 
@@ -84,4 +116,38 @@ public class HundirFlota {
             }
         }
     }
+
+    public static void posicionJugador(int barco, char[][] posicion) {
+        Scanner sc = new Scanner(System.in);
+
+
+    }
+
+    public static int posY() {
+        Scanner sc = new Scanner(System.in);
+        int Y;
+        do {
+            System.out.println("Dime una coordenada entre el 0-9: ");
+            Y = sc.nextInt();
+            if (Y < 10 && Y >= 0) {
+                Y = Y;
+            } else {
+                System.out.println("ERROR!! La coordenada que has puesto esta mal!");
+            }
+        } while (Y > 10 || Y < 0);
+        return Y;
+    }
+
+
+    /**
+     * Pone el nombre del jugador
+     *
+     * @nombre pone tu nombre
+     */
+    public static void nombre() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Dime tu nombre para empezar: ");
+        String nombre = sc.next();
+    }
+
 }
