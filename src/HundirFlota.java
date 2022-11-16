@@ -136,10 +136,8 @@ public class HundirFlota {
                 }
             }else {
 
-
             }
         }
-
     }
 
 
