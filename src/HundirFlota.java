@@ -7,7 +7,7 @@ public class HundirFlota {
         char[][] tableroB = new char[11][11];
         char[][] tableroC = new char[11][11];
         char[][] tableroD = new char[11][11];
-        int[] barcos = {2, 3, 3, 4, 5};
+        int[] barcos = {5, 4, 3, 3, 2};
 
         crearTablero(tableroA);
         crearTablero(tableroB);
@@ -15,8 +15,9 @@ public class HundirFlota {
         crearTablero(tableroD);
 
 //      nombre();
+        barcos(tableroA, tableroB, tableroC, tableroD, barcos);
         showJugador(tableroA, tableroB);
-        showPC(tableroC, tableroD);
+
     }
 
     /**
@@ -36,7 +37,7 @@ public class HundirFlota {
      */
     public static void showJugador(char[][] arrayD, char[][] arrayP) {
         clean();
-        System.out.println("\t TU TABLERO \t\t\t TU TABLERO");
+        System.out.println("\t TU TABLERO \t\t\t TUS DISPAROS");
         for (int fila = 0; fila < arrayD.length; fila++) {
             for (int columna = 0; columna < arrayD[0].length; columna++) {
                 System.out.print(arrayD[fila][columna]);
@@ -117,25 +118,71 @@ public class HundirFlota {
         }
     }
 
+    public static void barcos(char[][] A, char[][] B, char[][] C, char[][] D, int barcos[]) {
+        for (int i = 0; i < barcos.length; i++) {
+            System.out.println("En que coordenada quieres el barco de " + barcos[i] + " ? ");
+            posicionJugador(barcos[i], A);
+            clean();
+            showJugador(A, B);
+        }
+    }
+
     public static void posicionJugador(int barco, char[][] array) {
         Scanner sc = new Scanner(System.in);
         int Y = posY();
         int X = posX();
 
-        System.out.println("Como quieres el barco Horizontalmente(0) o Verticalmente(1) ?");
-        int horizontal = sc.nextInt();
-        if (horizontal == 0) {
-            if (X + barco > 10) {
-                if (compruebaX(array, Y, X, barco))
-                    for (int i = 0; i < barco; i++) {
-                        array[Y][X - i] = 'B';
+        if (barco != 1) {
+            System.out.println("Como quieres el barco Horizontalmente(0) o Verticalmente(1) ?");
+            int horizontal = sc.nextInt();
+            if (horizontal == 0) {
+                if (X + barco > 10) {
+                    if (!compruebaX(array, Y, X, barco))
+                        for (int i = 0; i < barco; i++) {
+                            array[Y][X - i] = 'B';
+                        }
+                    else {
+                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        posicionJugador(barco, array);
                     }
-                else {
-                    System.out.println("ERROR!! No puedes poner el barco alli !!");
-                    posicionJugador(barco, array);
+                } else {
+                    if (!compruebaX(array, Y, X, barco))
+                        for (int i = 0; i < barco; i++) {
+                            array[Y][X + i] = 'B';
+                        }
+                    else {
+                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        posicionJugador(barco, array);
+                    }
                 }
-            }else {
 
+            } else {
+                if (Y + barco > 10) {
+                    if (!compruebaY(array, Y, X, barco))
+                        for (int i = 0; i < barco; i++) {
+                            array[Y - i][X] = 'B';
+                        }
+                    else {
+                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        posicionJugador(barco, array);
+                    }
+                } else {
+                    if (!compruebaY(array, Y, X, barco))
+                        for (int i = 0; i < barco; i++) {
+                            array[Y + i][X] = 'B';
+                        }
+                    else {
+                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        posicionJugador(barco, array);
+                    }
+                }
+            }
+        } else {
+            if (array[Y][X] == '~') {
+                array[Y][X] = 'B';
+            } else {
+                System.out.println("ERROR!! No puedes poner el barco alli !!");
+                posicionJugador(barco, array);
             }
         }
     }
@@ -272,8 +319,8 @@ public class HundirFlota {
         do {
             System.out.println("Dime una coordenada entre el 0-9: ");
             Y = sc.nextInt();
-            if (Y < 10 && Y >= 0) {
-                Y = Y;
+            if (Y < 11 && Y >= 0) {
+                Y = Y-1;
             } else {
                 System.out.println("ERROR!! La coordenada que has puesto esta mal!");
             }
@@ -290,10 +337,10 @@ public class HundirFlota {
         Scanner sc = new Scanner(System.in);
         int X;
         do {
-            System.out.println("Dime una coordenada entre 0-9: ");
+            System.out.println("Dime una coordenada entre la A-J: ");
             X = sc.nextInt();
-            if (X < 10 && X >= 0) {
-                X = X + 1;
+            if (X < 11 && X >= 0) {
+                X = X;
             } else {
                 System.out.println("ERROR!! La coordenada que has puesto esta mal!");
             }
