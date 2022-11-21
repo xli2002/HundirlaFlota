@@ -16,7 +16,7 @@ public class HundirFlota {
 
 //      nombre();
         barcos(tableroA, tableroB, tableroC, tableroD, barcos);
-        showJugador(tableroA, tableroB);
+        showPC(tableroC, tableroD);
 
     }
 
@@ -127,6 +127,12 @@ public class HundirFlota {
         }
     }
 
+    /**
+     * Pone la posicion de los barcos del jugador
+     *
+     * @param barco devuelve los barcos
+     * @param array el lugar donde barco se a posicionado
+     */
     public static void posicionJugador(int barco, char[][] array) {
         Scanner sc = new Scanner(System.in);
         int Y = posY();
@@ -156,6 +162,63 @@ public class HundirFlota {
                     }
                 }
 
+            } else {
+                if (Y + barco > 10) {
+                    if (!compruebaY(array, Y, X, barco))
+                        for (int i = 0; i < barco; i++) {
+                            array[Y - i][X] = 'B';
+                        }
+                    else {
+                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        posicionJugador(barco, array);
+                    }
+                } else {
+                    if (!compruebaY(array, Y, X, barco))
+                        for (int i = 0; i < barco; i++) {
+                            array[Y + i][X] = 'B';
+                        }
+                    else {
+                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        posicionJugador(barco, array);
+                    }
+                }
+            }
+        } else {
+            if (array[Y][X] == '~') {
+                array[Y][X] = 'B';
+            } else {
+                System.out.println("ERROR!! No puedes poner el barco alli !!");
+                posicionJugador(barco, array);
+            }
+        }
+    }
+
+    public static void posicionPC(int barco, char[][] array) {
+        int Y = (int) (Math.random() * 10);
+        int X = ((int) (Math.random() * 10)) + 1;
+        int horizontal = (int) (Math.random() * 10);
+
+        if (barco != 1) {
+            if (horizontal < 5) {
+                if (X + barco > 10) {
+                    if (!compruebaX(array, Y, X, barco))
+                        for (int i = 0; i < barco; i++) {
+                            array[Y][X - i] = 'B';
+                        }
+                    else {
+                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        posicionJugador(barco, array);
+                    }
+                } else {
+                    if (!compruebaX(array, Y, X, barco))
+                        for (int i = 0; i < barco; i++) {
+                            array[Y][X + i] = 'B';
+                        }
+                    else {
+                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        posicionJugador(barco, array);
+                    }
+                }
             } else {
                 if (Y + barco > 10) {
                     if (!compruebaY(array, Y, X, barco))
@@ -316,14 +379,15 @@ public class HundirFlota {
     public static int posY() {
         Scanner sc = new Scanner(System.in);
         int Y;
+
         do {
-            System.out.println("Dime una coordenada entre el 0-9: ");
-            Y = sc.nextInt();
+            Y = Tools.getInteger("Dime una coordenada entre el 0-9: ");
             if (Y < 11 && Y >= 0) {
-                Y = Y-1;
+                Y = Y;
             } else {
                 System.out.println("ERROR!! La coordenada que has puesto esta mal!");
             }
+
         } while (Y > 10 || Y < 0);
         return Y;
     }
@@ -335,19 +399,20 @@ public class HundirFlota {
      */
     public static int posX() {
         Scanner sc = new Scanner(System.in);
-        int X;
+        char X;
         do {
             System.out.println("Dime una coordenada entre la A-J: ");
-            X = sc.nextInt();
+            X = sc.next().charAt(0);
+            X -= 'A';
+
             if (X < 11 && X >= 0) {
                 X = X;
             } else {
                 System.out.println("ERROR!! La coordenada que has puesto esta mal!");
             }
         } while (X > 10 || X < 0);
-        return X;
+        return X + 1;
     }
-
 
     /**
      * Pone el nombre del jugador
