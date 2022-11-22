@@ -7,26 +7,23 @@ public class HundirFlota {
         char[][] tableroB = new char[11][11];
         char[][] tableroC = new char[11][11];
         char[][] tableroD = new char[11][11];
-        int[] barcos = {5, 4, 3, 3, 2};
+        int[] barcos = {5, 4, 3, 2, 1};
 
         crearTablero(tableroA);
         crearTablero(tableroB);
         crearTablero(tableroC);
         crearTablero(tableroD);
 
-//      nombre();
+        nombre();
+        showJugador(tableroA, tableroB);
         barcos(tableroA, tableroB, tableroC, tableroD, barcos);
         showPC(tableroC, tableroD);
 
-    }
+        System.out.println("Empieza el juego!!");
 
-    /**
-     * Limpia la pantalla
-     *
-     * @clean limpia pantalla
-     */
-    public static void clean() {
-        System.out.flush();
+        juego(tableroA, tableroB, tableroC, tableroD, barcos);
+        showJugador(tableroA, tableroB);
+        showPC(tableroC, tableroD);
     }
 
     /**
@@ -36,7 +33,7 @@ public class HundirFlota {
      * @param arrayP Muestra los tableros de las Posiciones
      */
     public static void showJugador(char[][] arrayD, char[][] arrayP) {
-        clean();
+        Tools.clean();
         System.out.println("\t TU TABLERO \t\t\t TUS DISPAROS");
         for (int fila = 0; fila < arrayD.length; fila++) {
             for (int columna = 0; columna < arrayD[0].length; columna++) {
@@ -62,8 +59,8 @@ public class HundirFlota {
      * @param arrayP Muestra los tableros de las Posiciones
      */
     public static void showPC(char[][] arrayD, char[][] arrayP) {
-        clean();
-        System.out.println("\t PC TABLERO \t\t\t PC TABLERO");
+        Tools.clean();
+        System.out.println("\t PC TABLERO \t\t\t PC DISPAROS");
         for (int fila = 0; fila < arrayD.length; fila++) {
             for (int columna = 0; columna < arrayD[0].length; columna++) {
                 System.out.print(arrayD[fila][columna]);
@@ -118,14 +115,39 @@ public class HundirFlota {
         }
     }
 
+    /**
+     * Donde se pongan los barcos
+     *
+     * @param A      tablero A
+     * @param B      tablero B
+     * @param C      tablero C
+     * @param D      tablero D
+     * @param barcos los barcos
+     */
     public static void barcos(char[][] A, char[][] B, char[][] C, char[][] D, int barcos[]) {
         for (int i = 0; i < barcos.length; i++) {
             System.out.println("En que coordenada quieres el barco de " + barcos[i] + " ? ");
             posicionJugador(barcos[i], A);
-            clean();
+            posicionPC(barcos[i], C);
+            Tools.clean();
             showJugador(A, B);
         }
     }
+
+    public static void juego(char[][] A, char[][] B, char[][] C, char[][] D, int barcos[]) {
+
+
+    }
+
+    public static int misBarcos(int[] array) {
+        int barcos = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            barcos += array[i];
+        }
+        return barcos;
+    }
+
 
     /**
      * Pone la posicion de los barcos del jugador
@@ -139,8 +161,8 @@ public class HundirFlota {
         int X = posX();
 
         if (barco != 1) {
-            System.out.println("Como quieres el barco Horizontalmente(0) o Verticalmente(1) ?");
-            int horizontal = sc.nextInt();
+            int horizontal = Tools.getInteger("Como quieres el barco Horizontalmente(0) o Verticalmente(1) ? [Verticalmente por defecto]");
+
             if (horizontal == 0) {
                 if (X + barco > 10) {
                     if (!compruebaX(array, Y, X, barco))
@@ -193,6 +215,12 @@ public class HundirFlota {
         }
     }
 
+    /**
+     * Pone la posicion de los barcos del PC
+     *
+     * @param barco devuelve los barcos
+     * @param array el lugar donde barco se a posicionado
+     */
     public static void posicionPC(int barco, char[][] array) {
         int Y = (int) (Math.random() * 10);
         int X = ((int) (Math.random() * 10)) + 1;
@@ -250,7 +278,6 @@ public class HundirFlota {
         }
     }
 
-
     /**
      * Comprueba si hay algun barco horizontalmente
      *
@@ -307,6 +334,8 @@ public class HundirFlota {
                 else
                     comprueba = true;
             }
+        }else {
+            comprueba = true;
         }
         return comprueba;
     }
@@ -401,7 +430,7 @@ public class HundirFlota {
         Scanner sc = new Scanner(System.in);
         char X;
         do {
-            System.out.println("Dime una coordenada entre la A-J: ");
+            System.out.print("Dime una coordenada entre la A-J: ");
             X = sc.next().charAt(0);
             X -= 'A';
 
@@ -415,14 +444,56 @@ public class HundirFlota {
     }
 
     /**
+     * Dispara el jugador
+     *
+     * @param B devuelve el tablero B
+     * @param C devuelve el tablero C
+     */
+    public static void disparo(char[][] B, char[][] C) {
+        int Y = posY();
+        int X = posX();
+
+        if (C[Y][X] == 'B' || C[Y][X] == 'H') {
+            System.out.println("HIT!");
+            B[Y][X] = 'H';
+            C[Y][X] = 'H';
+        } else {
+            System.out.println("AGUA!");
+            B[Y][X] = 'A';
+            C[Y][X] = 'A';
+        }
+    }
+
+    /**
+     * Dispara el PC
+     *
+     * @param A devuelve el tablero A
+     * @param D devuelve el tablero D
+     */
+    public static void disparoPC(char[][] A, char[][] D) {
+        int Y = (int) (Math.random() * 10);
+        int X = (int) (Math.random() * 10);
+        X = X + 1;
+
+        if (A[Y][X] == 'B' || A[Y][X] == 'H') {
+            A[Y][X] = 'H';
+            D[Y][X] = 'H';
+        } else {
+            D[Y][X] = 'A';
+            A[Y][X] = 'A';
+        }
+    }
+
+    /**
      * Pone el nombre del jugador
      *
      * @nombre pone tu nombre
      */
-    public static void nombre() {
+    public static String nombre() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Dime tu nombre para empezar: ");
         String nombre = sc.next();
+        return nombre;
     }
 
 }
