@@ -11,7 +11,7 @@ public class Tools {
     public static int getInteger(String message) {
         Scanner sc = new Scanner(System.in);
         System.out.print(message);
-        while(!sc.hasNextInt()){
+        while (!sc.hasNextInt()) {
             System.out.println("ERROR!! La coordenada que has puesto debe ser un numero!");
             sc.next();
         }
@@ -25,5 +25,16 @@ public class Tools {
      */
     public static void clean() {
         System.out.flush();
+    }
+
+    /**
+     * Pone el nombre del jugador
+     *
+     * @nombre pone tu nombre
+     */
+    public static void nombre() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Dime tu nombre para empezar: ");
+        String nombre = sc.next();
     }
 }
