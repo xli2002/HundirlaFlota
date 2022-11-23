@@ -7,7 +7,7 @@ public class HundirFlota {
         char[][] tableroB = new char[11][11];
         char[][] tableroC = new char[11][11];
         char[][] tableroD = new char[11][11];
-        int[] barcos = {5, 4};
+        int[] barcos = {5,4,3,3,2};
         boolean ready = true, end = false, theend = false;
         int cant = 0, n = Barcos.misBarcos(barcos);
 
@@ -24,32 +24,36 @@ public class HundirFlota {
 
 
         do {
+            Screen.showPC(tableroC, tableroD);
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             Tools.clean();
             Screen.showJugador(tableroA, tableroB);
-            System.out.println("Tienes " + Barcos.numeroBarcos(tableroA, 'B') + cant
-                    + " barcos " + Barcos.numeroBarcos(tableroC, 'B')
-                    + " barcos de PC y llevas " + cant + " de disparos.");
+            System.out.println("Tienes " + Barcos.numeroBarcos(tableroB, 'H') + " de " + n
+                    + " y PC tiene " + Barcos.numeroBarcos(tableroC, 'B')
+                    + " barcos y llevas " + cant + " de disparos.");
 
             System.out.println("Te toca a ti disparar");
-            Screen.showPC(tableroC,tableroD);
             Disparos.disparo(tableroB, tableroC);
-            if (Barcos.numeroBarcos(tableroB, 'H') == n) ;
-            end = true;
+
+            if (Barcos.numeroBarcos(tableroB, 'H') == n) {
+                end = true;
+            }
             cant++;
-            if (cant == (n + 5))
-                ready = false;
+
             Disparos.disparoPC(tableroA, tableroD);
-            if (Barcos.numeroBarcos(tableroD, 'H') == n)
+            if (Barcos.numeroBarcos(tableroD, 'H') == n) {
                 theend = true;
-        } while (end == false || theend == false || ready == true);
+            }
+
+        } while (!end && !theend);
 
 
         Tools.clean();
         System.out.println("GG");
-        if (end)
+        if (end == true) {
             System.out.println("VICTORY");
-        else
+        } else {
             System.out.println("DEFEAT");
-
+        }
     }
 }
