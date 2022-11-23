@@ -22,7 +22,6 @@ public class HundirFlota {
 //        showPC(tableroC, tableroD);
         System.out.println("Empieza el juego!!");
 
-
         do {
             Screen.showPC(tableroC, tableroD);
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
