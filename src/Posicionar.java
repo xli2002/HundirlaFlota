@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Posicionar {
     /**
      * Pone la posicion de los barcos del jugador
@@ -8,12 +6,11 @@ public class Posicionar {
      * @param array el lugar donde barco se a posicionado
      */
     public static void posicionJugador(int barco, char[][] array) {
-        Scanner sc = new Scanner(System.in);
         int Y = Coordenadas.posY();
         int X = Coordenadas.posX();
 
         if (barco != 1) {
-            int horizontal = Tools.getInteger("Como quieres el barco Horizontalmente(0) o Verticalmente(1) ? [Verticalmente por defecto]");
+            int horizontal = Tools.getInteger("How do you want the boat Horizontally(0) or Vertically(1)? [Default vertically]");
 
             if (horizontal == 0) {
                 if (X + barco > 10) {
@@ -22,7 +19,7 @@ public class Posicionar {
                             array[Y][X - i] = 'B';
                         }
                     else {
-                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        System.out.println("ERROR!! You can't put the boat there !!");
                         posicionJugador(barco, array);
                     }
                 } else {
@@ -31,7 +28,7 @@ public class Posicionar {
                             array[Y][X + i] = 'B';
                         }
                     else {
-                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        System.out.println("ERROR!! You can't put the boat there !!");
                         posicionJugador(barco, array);
                     }
                 }
@@ -43,7 +40,7 @@ public class Posicionar {
                             array[Y - i][X] = 'B';
                         }
                     else {
-                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        System.out.println("ERROR!! You can't put the boat there !!");
                         posicionJugador(barco, array);
                     }
                 } else {
@@ -52,7 +49,7 @@ public class Posicionar {
                             array[Y + i][X] = 'B';
                         }
                     else {
-                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        System.out.println("ERROR!! You can't put the boat there !!");
                         posicionJugador(barco, array);
                     }
                 }
@@ -61,7 +58,7 @@ public class Posicionar {
             if (array[Y][X] == '~') {
                 array[Y][X] = 'B';
             } else {
-                System.out.println("ERROR!! No puedes poner el barco alli !!");
+                System.out.println("ERROR!! You can't put the boat there !!");
                 posicionJugador(barco, array);
             }
         }
@@ -86,7 +83,7 @@ public class Posicionar {
                             array[Y][X - i] = 'B';
                         }
                     else {
-                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        System.out.println("ERROR!! You can't put the boat there !!");
                         posicionJugador(barco, array);
                     }
                 } else {
@@ -95,7 +92,7 @@ public class Posicionar {
                             array[Y][X + i] = 'B';
                         }
                     else {
-                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        System.out.println("ERROR!! You can't put the boat there !!");
                         posicionJugador(barco, array);
                     }
                 }
@@ -106,7 +103,7 @@ public class Posicionar {
                             array[Y - i][X] = 'B';
                         }
                     else {
-                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        System.out.println("ERROR!! You can't put the boat there !!");
                         posicionJugador(barco, array);
                     }
                 } else {
@@ -115,7 +112,7 @@ public class Posicionar {
                             array[Y + i][X] = 'B';
                         }
                     else {
-                        System.out.println("ERROR!! No puedes poner el barco alli !!");
+                        System.out.println("ERROR!! You can't put the boat there !!");
                         posicionJugador(barco, array);
                     }
                 }
@@ -124,7 +121,7 @@ public class Posicionar {
             if (array[Y][X] == '~') {
                 array[Y][X] = 'B';
             } else {
-                System.out.println("ERROR!! No puedes poner el barco alli !!");
+                System.out.println("ERROR!! You can't put the boat there !!");
                 posicionJugador(barco, array);
             }
         }

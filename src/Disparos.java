@@ -15,7 +15,7 @@ public class Disparos {
             B[Y][X] = 'H';
             C[Y][X] = 'H';
         } else {
-            System.out.println("AGUA!");
+            System.out.println("WATER!");
             B[Y][X] = 'A';
             C[Y][X] = 'A';
         }

@@ -12,11 +12,11 @@ public class Coordenadas {
         int Y;
 
         do {
-            Y = Tools.getInteger("Dime una coordenada entre el 0-9: ");
+            Y = Tools.getInteger("Give me a coordinate between 0-9: ");
             if (Y < 11 && Y >= 0) {
                 Y = Y;
             } else {
-                System.out.println("ERROR!! La coordenada que has puesto esta mal!");
+                System.out.println("ERROR!! The coordinate you have entered is wrong!");
             }
 
         } while (Y > 10 || Y < 0);
@@ -32,14 +32,14 @@ public class Coordenadas {
         Scanner sc = new Scanner(System.in);
         char X;
         do {
-            System.out.print("Dime una coordenada entre la A-J: ");
-            X = sc.next().charAt(0);
+            System.out.print("Give me a coordinate between A-J: ");
+            X = sc.next().toUpperCase().charAt(0);
             X -= 'A';
 
             if (X < 11 && X >= 0) {
                 X = X;
             } else {
-                System.out.println("ERROR!! La coordenada que has puesto esta mal!");
+                System.out.println("ERROR!! The coordinate you have entered is wrong!");
             }
         } while (X > 10 || X < 0);
         return X + 1;

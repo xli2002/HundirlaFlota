@@ -7,7 +7,7 @@ public class Screen {
      */
     public static void showJugador(char[][] arrayD, char[][] arrayP) {
         Tools.clean();
-        System.out.println("\t TU TABLERO \t\t\t TUS DISPAROS");
+        System.out.println("\t YOUR TABLE \t\t\t YOUR SHOTS");
         for (int fila = 0; fila < arrayD.length; fila++) {
             for (int columna = 0; columna < arrayD[0].length; columna++) {
                 System.out.print(arrayD[fila][columna]);
@@ -33,7 +33,7 @@ public class Screen {
      */
     public static void showPC(char[][] arrayD, char[][] arrayP) {
         Tools.clean();
-        System.out.println("\t PC TABLERO \t\t\t PC DISPAROS");
+        System.out.println("\t PC TABLE \t\t\t PC SHOTS");
         for (int fila = 0; fila < arrayD.length; fila++) {
             for (int columna = 0; columna < arrayD[0].length; columna++) {
                 System.out.print(arrayD[fila][columna]);

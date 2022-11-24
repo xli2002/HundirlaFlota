@@ -12,7 +12,7 @@ public class Tools {
         Scanner sc = new Scanner(System.in);
         System.out.print(message);
         while (!sc.hasNextInt()) {
-            System.out.println("ERROR!! La coordenada que has puesto debe ser un numero!");
+            System.out.println("ERROR!! The coordinate you have entered must be a number!");
             sc.next();
         }
         return sc.nextInt();
@@ -32,9 +32,8 @@ public class Tools {
      *
      * @nombre pone tu nombre
      */
-    public static void nombre() {
+    public static String nombre() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Dime tu nombre para empezar: ");
-        String nombre = sc.next();
+        return sc.next();
     }
 }
