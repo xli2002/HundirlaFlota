@@ -5,7 +5,7 @@ public class HundirFlota {
         char[][] tableroB = new char[11][11];
         char[][] tableroC = new char[11][11];
         char[][] tableroD = new char[11][11];
-        int[] barcos = {1};
+        int[] barcos = {5,4,3,2,1};
         boolean end = false, theend = false;
         int cant = 0, n = Barcos.misBarcos(barcos);
 
@@ -18,7 +18,6 @@ public class HundirFlota {
         String nombre = Tools.nombre();
         Screen.showJugador(tableroA, tableroB);
         Barcos.barcos(tableroA, tableroB, tableroC, tableroD, barcos);
-//        showPC(tableroC, tableroD);
         System.out.println("Game started!!");
 
         do {
@@ -27,8 +26,7 @@ public class HundirFlota {
             Tools.clean();
             Screen.showJugador(tableroA, tableroB);
             System.out.println("You have " + Barcos.numeroBarcos(tableroB, 'H') + " of " + n
-                    + " and PC has " + Barcos.numeroBarcos(tableroC, 'B')
-                    + " boats and you have " + cant + " of shoot.");
+                    + " PC boats " + " and you shoot " + cant + " times.");
 
             System.out.println("It's your turn!!");
             Disparos.disparo(tableroB, tableroC);
@@ -45,9 +43,8 @@ public class HundirFlota {
 
         } while (!end && !theend);
 
-        Screen.showPC(tableroC, tableroD);
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         Tools.clean();
+        Screen.showPC(tableroC, tableroD);
         Screen.showJugador(tableroA, tableroB);
         Tools.clean();
         System.out.println("GG");

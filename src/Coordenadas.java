@@ -8,7 +8,6 @@ public class Coordenadas {
      * @return Da la posicion de Y
      */
     public static int posY() {
-        Scanner sc = new Scanner(System.in);
         int Y;
 
         do {
