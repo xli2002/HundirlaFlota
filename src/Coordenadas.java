@@ -43,5 +43,4 @@ public class Coordenadas {
         } while (X > 10 || X < 0);
         return X + 1;
     }
-
 }

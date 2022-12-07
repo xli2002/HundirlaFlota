@@ -1,5 +1,4 @@
 public class Comprueba {
-
     /**
      * Comprueba si hay algun barco horizontalmente
      *

@@ -1,4 +1,11 @@
 public class HundirFlota {
+    /**
+     * El juego de hundir la flota
+     *
+     * @author Xinyu Li
+     * @date 7-11-2022
+     *
+     */
     public static void main(String[] args) {
 
         char[][] tableroA = new char[11][11];
